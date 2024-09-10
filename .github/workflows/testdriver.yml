@@ -30,7 +30,7 @@ jobs:
     strategy:
       matrix:
         markdown: ${{ fromJson(needs.gather-markdown-files.outputs.markdown_files) }}
-    name: TestDriver - ${{ matrix.markdown }}  # Using just the filename
+    name: ${{ matrix.markdown }}  # Using just the filename
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
@@ -39,11 +39,18 @@ jobs:
         run: |
           echo "Running job for file: ${{ matrix.markdown }}"
 
+      - name: Read file content into environment variable
+        id: read_file
+        run: |
+          CONTENT=$(cat ./testdriver/.generate/${{ matrix.markdown }})
+          echo "MARKDOWN_CONTENT<<EOF" >> $GITHUB_ENV
+          echo "$CONTENT" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
       - uses: testdriverai/action@main
         with:
           key: ${{ secrets.TESTDRIVER_API_KEY }}
-          prompt: |
-            $(cat ./testdriver/.generate/${{ matrix.markdown }})
+          prompt: ${{ env.MARKDOWN_CONTENT }}  # Use the content of the file from the environment
           prerun: |
             cd $env:TEMP
             npm init -y
