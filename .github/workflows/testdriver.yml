@@ -38,10 +38,14 @@ jobs:
         run: |
           FILE_NAME=$(basename "${{ matrix.markdown }}" .md)
           echo "FILE_NAME=$FILE_NAME" >> $GITHUB_ENV
-        # Set the name of the job using the extracted file name
-        display-name: TestDriver - ${{ env.FILE_NAME }}
+
+      - name: Rename job (for logging and display purposes)
+        run: |
+          echo "Renaming job to: TestDriver - $FILE_NAME"
+        # Note: This step is optional just to show the dynamic name in the logs
 
       - uses: testdriverai/action@main
+        name: "TestDriver - ${{ env.FILE_NAME }}"  # Dynamically set the job name here
         with:
           key: ${{ secrets.TESTDRIVER_API_KEY }}
           prompt: |
