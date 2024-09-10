@@ -30,6 +30,7 @@ jobs:
     strategy:
       matrix:
         markdown: ${{ fromJson(needs.gather-markdown-files.outputs.markdown_files) }}
+      fail-fast: false
     name: ${{ matrix.markdown }}  # Using just the filename
     steps:
       - name: Check out repository
