@@ -21,16 +21,16 @@ jobs:
         run: |
           FILES=$(ls ./testdriver/.generate/*.md)
           FILES_JSON=$(echo "$FILES" | jq -R -s -c 'split("\n")[:-1]')
-          echo "files=$FILES_JSON" >> $GITHUB_ENV
           echo "::set-output name=files::$FILES_JSON"
 
   test:
     needs: gather-markdown-files
-    name: "TestDriver - ${{ matrix.markdown }}"
+    name: "TestDriver - ${{ matrix.file_name }}"
     runs-on: ubuntu-latest
     strategy:
       matrix:
         markdown: ${{ fromJson(needs.gather-markdown-files.outputs.markdown_files) }}
+        file_name: ${{ matrix.markdown | basename }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
@@ -39,28 +39,13 @@ jobs:
         id: extract_filename
         run: |
           FILE_NAME=$(basename "${{ matrix.markdown }}" .md)
-          echo "FILE_NAME=$FILE_NAME" >> $GITHUB_ENV
           echo "File Name: $FILE_NAME"
-
-      - name: "Read markdown content and encode it"
-        id: encode_content
-        run: |
-          MARKDOWN_FILE=${{ matrix.markdown }}
-          MARKDOWN_CONTENT=$(cat "$MARKDOWN_FILE" | base64)
-          echo "MARKDOWN_CONTENT=$MARKDOWN_CONTENT" >> $GITHUB_ENV
-          echo "Markdown content encoded."
-
-      - name: Decode markdown content for prompt
-        id: decode_content
-        run: |
-          DECODED_MARKDOWN_CONTENT=$(echo "$MARKDOWN_CONTENT" | base64 --decode)
-          echo "DECODED_MARKDOWN_CONTENT=$DECODED_MARKDOWN_CONTENT" >> $GITHUB_ENV
-          echo "Decoded markdown content: $DECODED_MARKDOWN_CONTENT"
 
       - uses: testdriverai/action@main
         with:
           key: ${{ secrets.TESTDRIVER_API_KEY }}
-          prompt: ${{ env.DECODED_MARKDOWN_CONTENT }}
+          prompt: |
+            $(cat ${{ matrix.markdown }})
           prerun: |
             cd $env:TEMP
             npm init -y
