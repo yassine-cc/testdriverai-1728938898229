@@ -48,7 +48,8 @@ jobs:
       - uses: testdriverai/action@main
         with:
           key: ${{ secrets.TESTDRIVER_API_KEY }}
-          prompt: ${{ env.MARKDOWN_CONTENT }}
+          prompt: |
+            ${{ env.MARKDOWN_CONTENT }}
           prerun: |
             cd $env:TEMP
             npm init -y

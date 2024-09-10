@@ -1,6 +1,6 @@
-1. Focus the browser window.
-2. Click on "Login".
-3. Enter valid credentials.
-4. Assert that the user is logged in successfully.
-5. Log out.
-6. Assert that the user is logged out successfully.
+1. /explore Focus the browser window.
+2. /explore Click on "Login" link in the main navigation.
+3. /explore Assert that the login form is displayed.
+4. /explore Fill in the login form with test credentials.
+5. /explore Click the "Login" button.
+6. /explore Assert that the user is successfully logged in and redirected to the dashboard.
