@@ -25,12 +25,10 @@ jobs:
 
   test:
     needs: gather-markdown-files
-    name: "TestDriver - ${{ matrix.file_name }}"
     runs-on: ubuntu-latest
     strategy:
       matrix:
         markdown: ${{ fromJson(needs.gather-markdown-files.outputs.markdown_files) }}
-        file_name: ${{ matrix.markdown | basename }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
@@ -39,7 +37,9 @@ jobs:
         id: extract_filename
         run: |
           FILE_NAME=$(basename "${{ matrix.markdown }}" .md)
-          echo "File Name: $FILE_NAME"
+          echo "FILE_NAME=$FILE_NAME" >> $GITHUB_ENV
+        # Set the name of the job using the extracted file name
+        display-name: TestDriver - ${{ env.FILE_NAME }}
 
       - uses: testdriverai/action@main
         with:
@@ -56,4 +56,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FORCE_COLOR: "3"
-          WEBSITE_URL: "https://example.com"
+          WEBSITE_URL: "https://pubnub.com"
