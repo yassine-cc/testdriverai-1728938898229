@@ -16,11 +16,12 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: Find all markdown files
+      - name: Find all markdown files and extract filenames
         id: markdown_list
         run: |
           FILES=$(ls ./testdriver/.generate/*.md)
-          FILES_JSON=$(echo "$FILES" | jq -R -s -c 'split("\n")[:-1]')
+          FILENAMES=$(basename -a $FILES)
+          FILES_JSON=$(echo "$FILENAMES" | jq -R -s -c 'split("\n")[:-1]')
           echo "::set-output name=files::$FILES_JSON"
 
   test:
@@ -29,27 +30,20 @@ jobs:
     strategy:
       matrix:
         markdown: ${{ fromJson(needs.gather-markdown-files.outputs.markdown_files) }}
-    name: TestDriver - ${{ steps.extract_filename.outputs.file_name }}  # Dynamically set the job name using the file name
+    name: TestDriver - ${{ matrix.markdown }}  # Using just the filename
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: Extract file name
-        id: extract_filename
+      - name: Display filename being tested
         run: |
-          FILE_NAME=$(basename "${{ matrix.markdown }}" .md)
-          echo "::set-output name=file_name::$FILE_NAME"
-
-      - name: Display job name
-        run: |
-          echo "Running job for file: ${{ steps.extract_filename.outputs.file_name }}"
+          echo "Running job for file: ${{ matrix.markdown }}"
 
       - uses: testdriverai/action@main
-        name: "TestDriver - ${{ steps.extract_filename.outputs.file_name }}"  # Dynamically set the job name here
         with:
           key: ${{ secrets.TESTDRIVER_API_KEY }}
           prompt: |
-            $(cat "${{ matrix.markdown }}")
+            $(cat ./testdriver/.generate/${{ matrix.markdown }})
           prerun: |
             cd $env:TEMP
             npm init -y
@@ -60,4 +54,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FORCE_COLOR: "3"
-          WEBSITE_URL: "https://example.com"
+          WEBSITE_URL: "https://pubnub.com"
