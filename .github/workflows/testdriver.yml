@@ -1,0 +1,62 @@
+name: TestDriver.ai
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  gather-markdown-files:
+    name: Gather Markdown Files
+    runs-on: ubuntu-latest
+    outputs:
+      markdown_files: ${{ steps.markdown_list.outputs.files }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Find all markdown files
+        id: markdown_list
+        run: |
+          FILES=$(ls ./testdriver/.generate/*.md)
+          FILES_JSON=$(echo "$FILES" | jq -R -s -c 'split("\n")[:-1]')
+          echo "::set-output name=files::$FILES_JSON"
+
+  test:
+    needs: gather-markdown-files
+    name: "TestDriver - ${{ matrix.file_name }}"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        markdown: ${{ fromJson(needs.gather-markdown-files.outputs.markdown_files) }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Extract file name
+        id: extract_filename
+        run: |
+          FILE_NAME=$(basename ${{ matrix.markdown }} .md)
+          echo "FILE_NAME=$FILE_NAME" >> $GITHUB_ENV
+
+      - name: "Read markdown content"
+        run: |
+          MARKDOWN_FILE=${{ matrix.markdown }}
+          echo "MARKDOWN_CONTENT=$(cat $MARKDOWN_FILE)" >> $GITHUB_ENV
+
+      - uses: testdriverai/action@main
+        with:
+          key: ${{ secrets.TESTDRIVER_API_KEY }}
+          prompt: ${{ env.MARKDOWN_CONTENT }}
+          prerun: |
+            cd $env:TEMP
+            npm init -y
+            npm install dashcam-chrome
+            Start-Process "C:/Program Files/Google/Chrome/Application/chrome.exe" -ArgumentList "--start-maximized", "--load-extension=$(pwd)/node_modules/dashcam-chrome/build", "${{ env.WEBSITE_URL }}"
+            exit
+    
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FORCE_COLOR: "3"
+          WEBSITE_URL: "https://example.com"
