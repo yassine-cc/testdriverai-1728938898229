@@ -29,6 +29,7 @@ jobs:
     strategy:
       matrix:
         markdown: ${{ fromJson(needs.gather-markdown-files.outputs.markdown_files) }}
+    name: TestDriver - ${{ steps.extract_filename.outputs.file_name }}  # Dynamically set the job name using the file name
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
@@ -37,19 +38,18 @@ jobs:
         id: extract_filename
         run: |
           FILE_NAME=$(basename "${{ matrix.markdown }}" .md)
-          echo "FILE_NAME=$FILE_NAME" >> $GITHUB_ENV
+          echo "::set-output name=file_name::$FILE_NAME"
 
-      - name: Rename job (for logging and display purposes)
+      - name: Display job name
         run: |
-          echo "Renaming job to: TestDriver - $FILE_NAME"
-        # Note: This step is optional just to show the dynamic name in the logs
+          echo "Running job for file: ${{ steps.extract_filename.outputs.file_name }}"
 
       - uses: testdriverai/action@main
-        name: "TestDriver - ${{ env.FILE_NAME }}"  # Dynamically set the job name here
+        name: "TestDriver - ${{ steps.extract_filename.outputs.file_name }}"  # Dynamically set the job name here
         with:
           key: ${{ secrets.TESTDRIVER_API_KEY }}
           prompt: |
-            $(cat ${{ matrix.markdown }})
+            $(cat "${{ matrix.markdown }}")
           prerun: |
             cd $env:TEMP
             npm init -y
@@ -60,4 +60,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FORCE_COLOR: "3"
-          WEBSITE_URL: "https://pubnub.com"
+          WEBSITE_URL: "https://example.com"
