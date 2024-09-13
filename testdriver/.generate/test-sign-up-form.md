@@ -4,3 +4,4 @@
 4. /explore Fill in the sign-up form fields with test data.
 5. /explore Click the "Sign Up" button.
 6. /explore Assert that a confirmation message is displayed or that the user is redirected to a welcome page.
+7. /save

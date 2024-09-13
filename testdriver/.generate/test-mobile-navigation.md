@@ -4,3 +4,4 @@
 4. /explore Assert that the mobile navigation menu is displayed.
 5. /explore Click on each link in the mobile navigation menu.
 6. /explore Assert that each link redirects to the correct page.
+7. /save

@@ -4,3 +4,4 @@
 4. /explore Click on the generate API key button.
 5. /explore Assert that a new API key is generated.
 6. /explore Assert that the generated API key is displayed on the screen.
+7. /save

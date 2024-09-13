@@ -7,3 +7,4 @@
 7. /explore Assert that the pricing page is loaded.
 8. /explore Click on "Developers" link in the main navigation.
 9. /explore Assert that the developers page is loaded.
+10. /save

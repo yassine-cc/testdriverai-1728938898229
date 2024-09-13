@@ -4,3 +4,4 @@
 4. /explore Fill in the login form with test credentials.
 5. /explore Click the "Login" button.
 6. /explore Assert that the user is successfully logged in and redirected to the dashboard.
+7. /save

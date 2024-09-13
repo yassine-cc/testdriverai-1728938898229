@@ -5,3 +5,4 @@
 5. /explore Enter a test message in the chat box.
 6. /explore Assert that a response is received from the chat support.
 7. /explore Assert that the conversation is logged correctly.
+8. /save

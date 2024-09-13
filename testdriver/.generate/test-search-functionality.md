@@ -5,3 +5,4 @@
 5. /explore Press enter.
 6. /explore Assert that the search results page is displayed.
 7. /explore Assert that search results are relevant to the search term.
+8. /save
