@@ -52,6 +52,7 @@ jobs:
         with:
           key: ${{ secrets.TESTDRIVER_API_KEY }}
           prompt: ${{ env.MARKDOWN_CONTENT }}  # Use the content of the file from the environment
+          create-pr: true
           prerun: |
             cd $env:TEMP
             npm init -y
