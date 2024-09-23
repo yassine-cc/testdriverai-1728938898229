@@ -1,0 +1,29 @@
+permissions:
+  actions: read
+  contents: write
+  pull-requests: write
+
+on:
+  workflow_dispatch:
+    url:
+      description: Website url to use for generation
+      required: true
+      type: string
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: testdriverai/action@main
+        with:
+          key: ${{ secrets.TESTDRIVER_API_KEY }}
+          prompt: 1. /generate
+          prerun: |
+            cd $env:TEMP
+            npm init -y
+            npm install dashcam-chrome
+            Start-Process "C:/Program Files/Google/Chrome/Application/chrome.exe" -ArgumentList "--start-maximized", "--load-extension=$(pwd)/node_modules/dashcam-chrome/build", "${{ inputs.url }}"
+            exit
+          create-pr: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FORCE_COLOR: "3"
