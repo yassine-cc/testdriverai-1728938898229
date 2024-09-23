@@ -1,3 +1,5 @@
+name: TestDriver.ai / Explore
+
 permissions:
   actions: read
   contents: write

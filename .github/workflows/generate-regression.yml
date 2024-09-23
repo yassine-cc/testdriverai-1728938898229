@@ -1,4 +1,4 @@
-name: TestDriver.ai
+name: TestDriver.ai / Regression
 
 on:
   push:
