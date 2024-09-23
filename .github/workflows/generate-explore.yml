@@ -5,10 +5,12 @@ permissions:
 
 on:
   workflow_dispatch:
-    url:
-      description: Website url to use for generation
-      required: true
-      type: string
+    inputs:
+      url:
+        description: Website url to use for generation
+        required: true
+        type: string
+
 jobs:
   generate:
     runs-on: ubuntu-latest
