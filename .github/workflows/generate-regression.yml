@@ -1,8 +1,6 @@
 name: TestDriver.ai / Regression
 
 on:
-  push:
-    branches: ["main"]
   workflow_dispatch:
 
 jobs:
