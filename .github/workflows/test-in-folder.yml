@@ -7,7 +7,7 @@ on:
 
 jobs:
   gather-test-files:
-    name: Gather Ttest Files
+    name: Gather Test Files
     runs-on: ubuntu-latest
     outputs:
       test_files: ${{ steps.test_list.outputs.files }}
@@ -15,7 +15,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: Find all tetst files and extract filenames
+      - name: Find all test files and extract filenames
         id: test_list
         run: |
           FILES=$(ls ./testdriver/*.yml)
