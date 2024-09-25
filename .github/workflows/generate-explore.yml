@@ -29,5 +29,4 @@ jobs:
             exit
           create-pr: true
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FORCE_COLOR: "3"
