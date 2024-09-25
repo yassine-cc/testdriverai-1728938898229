@@ -1,4 +1,4 @@
-name: TestDriver.ai / Regression
+name: TestDriver.ai / Generate / Regression
 
 on:
   workflow_dispatch:
