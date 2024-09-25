@@ -25,7 +25,7 @@ jobs:
             cd $env:TEMP
             npm init -y
             npm install dashcam-chrome
-            Start-Process "C:/Program Files/Google/Chrome/Application/chrome.exe" -ArgumentList "--start-maximized", "--load-extension=$(pwd)/node_modules/dashcam-chrome/build", "${{ inputs.url }}"
+            Start-Process "C:/Program Files/Google/Chrome/Application/chrome.exe" -ArgumentList "--start-maximized", "--load-extension=$(pwd)/node_modules/dashcam-chrome/build", "${{ vars.TESTDRIVER_WEBISTE }}"
             exit
           create-pr: true
         env:
