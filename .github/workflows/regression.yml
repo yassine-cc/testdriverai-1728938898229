@@ -42,7 +42,7 @@ jobs:
       - uses: testdriverai/action@main
         with:
           key: ${{ secrets.TESTDRIVER_API_KEY }}
-          prompt: 1. /run /testdriver/${{ matrix.test }} 
+          prompt: 1. /run testdriver/${{ matrix.test }} 
           prerun: |
             cd $env:TEMP
             npm init -y
