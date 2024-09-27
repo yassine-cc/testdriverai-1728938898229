@@ -16,20 +16,5 @@ steps:
         text: Start Building
         description: main call to action button
         action: click
-  - prompt: Click on the main call to action button.
-    commands:
-      - command: focus-application
-        name: Google Chrome
-      - command: scroll-until-text
-        text: Start Building
-        direction: down
-      - command: hover-text
-        text: Start Building
-        description: main call to action button
-        action: click
-  - prompt: Click on the main call to action button.
-    commands:
-      - command: hover-text
-        text: Register
-        description: main call to action button
-        action: click
+      - command: assert
+        expect: the sign up form shows
