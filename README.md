@@ -2,7 +2,7 @@
 
 # TestDriver.ai Web Quickstart
 
-GitHub actions workflow files that generate and run end-to-end regression tests.
+GitHub actions workflow files that generate and run end-to-end regression tests on website.
 
 ---
 
@@ -14,34 +14,38 @@ GitHub actions workflow files that generate and run end-to-end regression tests.
 
 ---
 
-## Getting Started
+## Prereqs
 
-Setup takes place entirely within GitHub and the TestDriver.ai dashboard. There's no need to clone this repo locally.
+1. You need a TestDriver API key
+1. A live website URL to test 
 
-Our steps look like this:
+> Setup takes place entirely within GitHub and the TestDriver.ai dashboard. There's no need to clone this repo locally.
 
-1. Use this repository template.
-1. Generate test plans
-1. Generate regression tests
+### Setup
 
-Overview
-This short tutorial will walk you through setup of TestDriver in a new repository! It only takes a few steps and we're going to accomplish everything within the GitHub interface and TestDriver dashboard.
-Set up your test repository
-Generate test plans
-Generate regression tests
-If you don't have a TestDriver API key, you'll need to apply for the private beta before following this tutorial.
-Set up the test repository
-First, copy our template repository
-This template repository contains GitHub actions workflow files that will handle generating and running tests. 
-Open our template repository in a new tab
-Click "use this template"
+#### Fork this repo
 
-Click "Create a new repository"
-Customize the template with GitHub variables
-This quickstart will perform end to end tests on a live website. 
-Add TESTDRIVER_WEBSITEvariable
+First, make a copy of this repository. This repo contains example workflow files to get you set up with TestDriver super fast.
 
-https://github.com/{{your user}}/{{your repo}}/settings/variables/actions
+[Click here to fork this repository](https://github.com/testdriverai/quickstart-web/fork).
+
+#### Create a `TESTDRIVER_WEBSITE` variable.
+
+Once the fork has been created, [add a GitHub variable](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/store-information-in-variables#creating-configuration-variables-for-an-environment).
+
+You must set the GitHub **variable** `TESTDRIVER_WEBSITE`. The value should be the root domain of the website you want to test (ex `https://example.com`).
+
+#### Create a `TESTDRIVER_API_KEY` secret.
+
+Once the fork has been created, [add a GitHub variable](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/store-information-in-variables#creating-configuration-variables-for-an-environment).
+
+You must set the GitHub **variable** `TESTDRIVER_WEBSITE`. The value should be the root domain of the website you want to test (ex `https://example.com`).
+
+### Generate Test Plans
+
+Your repo will come with 3 GitHub workflows already configured. 
+
+/actions/workflows/generate-explore.yml
 
 Run the workflow
 
