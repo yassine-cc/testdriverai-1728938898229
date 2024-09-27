@@ -16,7 +16,7 @@ GitHub actions workflow files that generate and run end-to-end regression tests 
 
 ## Setup
 
-Fisrt, [fork this repository](https://github.com/testdriverai/quickstart-web/fork).
+First, [fork this repository](https://github.com/testdriverai/quickstart-web/fork).
 
 Next, [create a GitHub secret](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/store-information-in-variables#creating-configuration-variables-for-a-repository) named `TESTDRIVER_API_KEY` using your API key from [the testdriver dashboard](https://app.dashcam.io/team).
 
