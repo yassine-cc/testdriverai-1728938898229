@@ -18,41 +18,29 @@ steps:
         text: Products
         description: menu item
         action: click
+      - command: assert
+        expect: the products menu shows
       - command: hover-text
         text: Solutions
         description: menu item
         action: click
+      - command: assert
+        expect: the solutions page shows
       - command: hover-text
         text: Pricing
         description: menu item
         action: click
+      - command: assert
+        expect: the pricing page shows
       - command: hover-text
         text: Developers
         description: menu item
         action: click
+      - command: assert
+        expect: the developers page shows
       - command: hover-text
         text: Resources
         description: menu item
         action: click
-  - prompt: Click through each menu item.
-    commands:
-      - command: hover-text
-        text: Products
-        description: menu item
-        action: click
-      - command: hover-text
-        text: Solutions
-        description: menu item
-        action: click
-      - command: hover-text
-        text: Pricing
-        description: menu item
-        action: click
-      - command: hover-text
-        text: Developers
-        description: menu item
-        action: click
-      - command: hover-text
-        text: Resources
-        description: menu item
-        action: click
+      - command: assert
+        expect: the resources menu shows
