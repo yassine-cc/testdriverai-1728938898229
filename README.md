@@ -14,6 +14,8 @@ GitHub actions workflow files that generate and run end-to-end regression tests 
 
 ---
 
+> TestDriver is currently in limited private beta. [Apply for an  API key here](https://o9w85nshvub.typeform.com/to/llG1wNkE).
+
 ## Setup
 
 First, [fork this repository](https://github.com/testdriverai/quickstart-web/fork).
