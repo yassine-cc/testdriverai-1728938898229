@@ -17,7 +17,7 @@ jobs:
         id: markdown_list
         run: |
           FILES=$(ls ./testdriver/generate/*.md)
-          FILENAMES=$(basename -a $FILES)
+          FILENAMES=$(basename -a $FILES | sed 's/\.md$//')
           FILES_JSON=$(echo "$FILENAMES" | jq -R -s -c 'split("\n")[:-1]')
           echo "::set-output name=files::$FILES_JSON"
 
@@ -35,12 +35,12 @@ jobs:
 
       - name: Display filename being tested
         run: |
-          echo "Running job for file: ${{ matrix.markdown }}"
+          echo "Running job for file: ${{ matrix.markdown }}.md"
 
       - name: Read file content into environment variable
         id: read_file
         run: |
-          CONTENT=$(cat ./testdriver/generate/${{ matrix.markdown }})
+          CONTENT=$(cat ./testdriver/generate/${{ matrix.markdown }}.md)
           echo "MARKDOWN_CONTENT<<EOF" >> $GITHUB_ENV
           echo "$CONTENT" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
@@ -49,12 +49,14 @@ jobs:
         with:
           key: ${{ secrets.TESTDRIVER_API_KEY }}
           prompt: ${{ env.MARKDOWN_CONTENT }}  # Use the content of the file from the environment
-          create-pr: true
           prerun: |
             cd $env:TEMP
             npm init -y
             npm install dashcam-chrome
             Start-Process "C:/Program Files/Google/Chrome/Application/chrome.exe" -ArgumentList "--start-maximized", "--load-extension=$(pwd)/node_modules/dashcam-chrome/build", "${{ vars.TESTDRIVER_WEBSITE }}"
             exit
+          pr-title: "TestDriver.ai / Generate Test / ${{ matrix.markdown }}"
+          pr-branch: testdriver/generate-test-${{ github.run_id }}-${{ github.run_attempt }}
+          pr-test-filename: ${{matrix.markdown}}.yml
         env:
           FORCE_COLOR: "3"
