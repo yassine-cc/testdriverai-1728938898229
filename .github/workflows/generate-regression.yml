@@ -55,6 +55,7 @@ jobs:
             npm install dashcam-chrome
             Start-Process "C:/Program Files/Google/Chrome/Application/chrome.exe" -ArgumentList "--start-maximized", "--load-extension=$(pwd)/node_modules/dashcam-chrome/build", "${{ vars.TESTDRIVER_WEBSITE }}"
             exit
+          create-pr: true
           pr-title: "TestDriver.ai / Generate Test / ${{ matrix.markdown }}"
           pr-branch: testdriver/generate-test-${{ github.run_id }}-${{ github.run_attempt }}
           pr-test-filename: ${{matrix.markdown}}.yml
