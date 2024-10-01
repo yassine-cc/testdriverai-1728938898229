@@ -1,4 +1,4 @@
-name: TestDriver.ai / Generate / Explore
+name: TestDriver.ai / Generate / Test Plans
 
 permissions:
   actions: read
