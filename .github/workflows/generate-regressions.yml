@@ -3,6 +3,11 @@ name: TestDriver.ai / Generate / Regressions
 on:
   workflow_dispatch:
 
+permissions:
+  actions: read
+  contents: write
+  pull-requests: write
+
 jobs:
   gather-markdown-files:
     name: Gather Markdown Files
