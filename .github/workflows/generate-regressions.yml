@@ -61,3 +61,4 @@ jobs:
           pr-test-filename: ${{matrix.markdown}}.yml
         env:
           FORCE_COLOR: "3"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
