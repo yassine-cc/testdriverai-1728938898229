@@ -62,7 +62,7 @@ jobs:
             exit
           create-pr: true
           pr-title: "TestDriver.ai / Generate Test / ${{ matrix.markdown }}"
-          pr-branch: testdriver/generate-test-${{ github.run_id }}-${{ github.run_attempt }}
+          pr-branch: testdriver/regression-${{ matrix.markdown }}-${{ github.run_id }}-${{ github.run_attempt }}
           pr-test-filename: ${{matrix.markdown}}.yml
         env:
           FORCE_COLOR: "3"

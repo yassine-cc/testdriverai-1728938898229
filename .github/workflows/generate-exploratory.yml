@@ -1,4 +1,4 @@
-name: TestDriver.ai / Generate / Test Plans
+name: TestDriver.ai / Generate / Exploratory
 
 permissions:
   actions: read
@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  generate:
+  exploratory:
     runs-on: ubuntu-latest
     steps:
       - uses: testdriverai/action@main
@@ -24,7 +24,7 @@ jobs:
             exit        
           create-pr: true
           pr-title: "TestDriver.ai / Generate Test Plans"
-          pr-branch: testdriver/generate-${{ github.run_id }}-${{ github.run_attempt }}
+          pr-branch: testdriver/exploratory-${{ github.run_id }}-${{ github.run_attempt }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FORCE_COLOR: "3"
