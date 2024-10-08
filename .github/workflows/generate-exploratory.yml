@@ -15,7 +15,9 @@ jobs:
       - uses: testdriverai/action@main
         with:
           key: ${{ secrets.TESTDRIVER_API_KEY }}
-          prompt: 1. /generate web 10
+          prompt: 
+            1. /generate web 10
+            2. /summarize
           prerun: |
             cd $env:TEMP
             npm init -y

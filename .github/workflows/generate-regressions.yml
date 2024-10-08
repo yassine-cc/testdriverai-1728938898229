@@ -53,7 +53,9 @@ jobs:
       - uses: testdriverai/action@main
         with:
           key: ${{ secrets.TESTDRIVER_API_KEY }}
-          prompt: ${{ env.MARKDOWN_CONTENT }}  # Use the content of the file from the environment
+          prompt: |
+            ${{ env.MARKDOWN_CONTENT }}  # Use the content of the file from the environment
+            1. /summarize
           prerun: |
             cd $env:TEMP
             npm init -y
