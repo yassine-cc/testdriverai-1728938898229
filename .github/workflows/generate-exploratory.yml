@@ -10,6 +10,8 @@ on:
 
 jobs:
   exploratory:
+    outputs:
+      new-pr-branch: testdriver/exploratory-${{ github.run_id }}-${{ github.run_attempt }}
     runs-on: ubuntu-latest
     steps:
       - uses: testdriverai/action@main
