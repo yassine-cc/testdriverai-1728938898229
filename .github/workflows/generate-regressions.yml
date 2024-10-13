@@ -21,6 +21,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.ref }}
 
       - name: Find all markdown files and extract filenames
         id: markdown_list
@@ -41,6 +43,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.ref }}
 
       - name: Display filename being tested
         run: |
@@ -61,7 +65,8 @@ jobs:
         with:
           key: ${{ secrets.TESTDRIVER_API_KEY }}
           prompt: |
-            ${{ env.MARKDOWN_CONTENT }}
+            ${{ env.MARKDOWN_CONTENT }}  # Use the content of the file from the environment
+            1. /summarize
           prerun: |
             cd $env:TEMP
             npm init -y
