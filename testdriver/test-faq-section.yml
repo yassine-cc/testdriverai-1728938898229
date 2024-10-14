@@ -1,0 +1,174 @@
+version: 4.0.68
+steps:
+  - prompt: Focus the browser window.
+    commands: []
+  - prompt: Locate and click on the "FAQ" link in the header.
+    commands:
+      - command: hover-text
+        text: FAQ
+        description: FAQ link in the header
+        action: click
+  - prompt: Assert that the FAQ section is displayed.
+    commands:
+      - command: assert
+        expect: the FAQ section is displayed
+  - prompt: >-
+      Assert that FAQ items can be expanded and collapsed.  # Use the content of
+      the file from the environment
+    commands:
+      - command: hover-text
+        text: How does it work?
+        description: FAQ item to expand
+        action: click
+      - command: assert
+        expect: the FAQ item "How does it work?" is expanded
+      - command: hover-text
+        text: How does it work?
+        description: FAQ item to collapse
+        action: click
+      - command: assert
+        expect: the FAQ item "How does it work?" is collapsed
+  - prompt: >-
+      Assert that FAQ items can be expanded and collapsed.  # Use the content of
+      the file from the environment
+    commands:
+      - command: hover-text
+        text: How does it work?
+        description: FAQ item to expand
+        action: click
+      - command: assert
+        expect: the FAQ item "How does it work?" is expanded
+      - command: hover-text
+        text: How does it work?
+        description: FAQ item to collapse
+        action: click
+      - command: assert
+        expect: the FAQ item "How does it work?" is collapsed
+  - prompt: >-
+      Assert that FAQ items can be expanded and collapsed.  # Use the content of
+      the file from the environment
+    commands:
+      - command: hover-text
+        text: How does it work?
+        description: FAQ item to expand
+        action: click
+      - command: assert
+        expect: the FAQ item "How does it work?" is expanded
+      - command: hover-text
+        text: How does it work?
+        description: FAQ item to collapse
+        action: click
+      - command: assert
+        expect: the FAQ item "How does it work?" is collapsed
+  - prompt: >-
+      Assert that FAQ items can be expanded and collapsed.  # Use the content of
+      the file from the environment
+    commands:
+      - command: hover-text
+        text: How does it work?
+        description: FAQ item to expand
+        action: click
+      - command: assert
+        expect: the FAQ item "How does it work?" is expanded
+      - command: hover-text
+        text: How does it work?
+        description: FAQ item to collapse
+        action: click
+      - command: assert
+        expect: the FAQ item "How does it work?" is collapsed
+  - prompt: >-
+      Assert that FAQ items can be expanded and collapsed.  # Use the content of
+      the file from the environment
+    commands:
+      - command: hover-text
+        text: How does it work?
+        description: FAQ item to expand
+        action: click
+      - command: assert
+        expect: the FAQ item "How does it work?" is expanded
+      - command: hover-text
+        text: How does it work?
+        description: FAQ item to collapse
+        action: click
+      - command: assert
+        expect: the FAQ item "How does it work?" is collapsed
+  - prompt: >-
+      Assert that FAQ items can be expanded and collapsed.  # Use the content of
+      the file from the environment
+    commands:
+      - command: hover-text
+        text: How does it work?
+        description: FAQ item to expand
+        action: click
+      - command: assert
+        expect: the FAQ item "How does it work?" is expanded
+      - command: hover-text
+        text: How does it work?
+        description: FAQ item to collapse
+        action: click
+      - command: assert
+        expect: the FAQ item "How does it work?" is collapsed
+  - prompt: >-
+      Assert that FAQ items can be expanded and collapsed.  # Use the content of
+      the file from the environment
+    commands:
+      - command: hover-text
+        text: How does it work?
+        description: FAQ item to expand
+        action: click
+      - command: assert
+        expect: the FAQ item "How does it work?" is expanded
+      - command: hover-text
+        text: How does it work?
+        description: FAQ item to collapse
+        action: click
+      - command: assert
+        expect: the FAQ item "How does it work?" is collapsed
+  - prompt: >-
+      Assert that FAQ items can be expanded and collapsed.  # Use the content of
+      the file from the environment
+    commands:
+      - command: hover-text
+        text: How does it work?
+        description: FAQ item to expand
+        action: click
+      - command: assert
+        expect: the FAQ item "How does it work?" is expanded
+      - command: hover-text
+        text: How does it work?
+        description: FAQ item to collapse
+        action: click
+      - command: assert
+        expect: the FAQ item "How does it work?" is collapsed
+  - prompt: >-
+      Assert that FAQ items can be expanded and collapsed.  # Use the content of
+      the file from the environment
+    commands:
+      - command: hover-text
+        text: How does it work?
+        description: FAQ item to expand
+        action: click
+      - command: assert
+        expect: the FAQ item "How does it work?" is expanded
+      - command: hover-text
+        text: How does it work?
+        description: FAQ item to collapse
+        action: click
+      - command: assert
+        expect: the FAQ item "How does it work?" is collapsed
+  - prompt: >-
+      Assert that FAQ items can be expanded and collapsed.  # Use the content of
+      the file from the environment
+    commands:
+      - command: hover-text
+        text: How does it work?
+        description: FAQ item to expand
+        action: click
+      - command: assert
+        expect: the FAQ item "How does it work?" is expanded
+      - command: hover-text
+        text: How does it work?
+        description: FAQ item to collapse
+        action: click
+      - command: assert
+        expect: the FAQ item "How does it work?" is collapsed
