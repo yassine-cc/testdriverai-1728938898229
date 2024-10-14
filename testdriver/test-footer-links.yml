@@ -1,0 +1,27 @@
+version: 4.0.68
+steps:
+  - prompt: Focus the browser window.
+    commands:
+      - command: focus-application
+        name: Google Chrome
+  - prompt: Scroll to the footer.
+    commands:
+      - command: scroll-until-text
+        text: Copyright 2024
+        direction: down
+  - prompt: Click on any footer link.
+    commands:
+      - command: hover-text
+        text: Privacy
+        description: footer link
+        action: click
+  - prompt: Assert that the corresponding page is displayed.
+    commands:
+      - command: assert
+        expect: Privacy Policy is displayed
+  - prompt: >-
+      Assert that no errors are present on the page.  # Use the content of the
+      file from the environment
+    commands:
+      - command: assert
+        expect: No error messages like "404", "500", or "Error" are displayed
