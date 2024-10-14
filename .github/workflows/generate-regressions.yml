@@ -1,16 +1,28 @@
 name: TestDriver.ai / Generate / Regressions
 
-on:
-  workflow_dispatch:
-  pull_request:
-    paths:
-      - "testdriver/generate/*.md"
-    types: [opened, synchronize, reopened, ready_for_review, labeled, unlabeled]
-
 permissions:
   actions: read
   contents: write
   pull-requests: write
+
+on:
+  workflow_call:
+    inputs:
+      website-url:
+        type: string
+        required: true
+        description: The URL of the website to test
+      base-branch:
+        type: string
+        required: true
+        description: The branch name of the pull request
+    secrets:
+      key:
+        required: true
+        description: The TestDriver API key
+      GH_TOKEN:
+        required: true
+        description: The GitHub token
 
 jobs:
   gather-markdown-files:
@@ -22,7 +34,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.ref }}
+          ref: ${{ inputs.base-branch }}
 
       - name: Find all markdown files and extract filenames
         id: markdown_list
@@ -44,7 +56,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.ref }}
+          ref: ${{ inputs.base-branch }}
 
       - name: Display filename being tested
         run: |
@@ -63,7 +75,7 @@ jobs:
         id: extract_branch
       - uses: testdriverai/action@main
         with:
-          key: ${{ secrets.TESTDRIVER_API_KEY }}
+          key: ${{ secrets.key }}
           prompt: |
             ${{ env.MARKDOWN_CONTENT }}  # Use the content of the file from the environment
             1. /summarize
@@ -71,10 +83,10 @@ jobs:
             cd $env:TEMP
             npm init -y
             npm install dashcam-chrome
-            Start-Process "C:/Program Files/Google/Chrome/Application/chrome.exe" -ArgumentList "--start-maximized", "--load-extension=$(pwd)/node_modules/dashcam-chrome/build", "${{ vars.TESTDRIVER_WEBSITE }}"
+            Start-Process "C:/Program Files/Google/Chrome/Application/chrome.exe" -ArgumentList "--start-maximized", "--load-extension=$(pwd)/node_modules/dashcam-chrome/build", "${{ inputs.website-url }}"
             exit
           create-pr: true
-          pr-base: ${{ steps.extract_branch.outputs.branch }}
+          pr-base: ${{ inputs.base-branch }}
           pr-title: "TestDriver.ai / Generate Test / ${{ matrix.markdown }}"
           pr-branch: testdriver/regression-${{ matrix.markdown }}-${{ github.run_id }}-${{ github.run_attempt }}
           pr-test-filename: ${{matrix.markdown}}.yml
