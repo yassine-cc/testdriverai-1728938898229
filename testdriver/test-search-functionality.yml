@@ -1,0 +1,27 @@
+version: 4.0.68
+steps:
+  - prompt: Focus the browser window.
+    commands:
+      - command: focus-application
+        name: Google Chrome
+  - prompt: Locate the search bar and click on it.
+    commands:
+      - command: hover-text
+        text: Search Google or type a URL
+        description: main google search
+        action: click
+  - prompt: Enter a search term and press enter.
+    commands:
+      - command: type
+        text: AI testing tools
+      - command: press-keys
+        keys:
+          - enter
+  - prompt: Assert that the search results are displayed.
+    commands:
+      - command: assert
+        expect: search results are displayed
+  - prompt: >-
+      Assert that results are relevant and no errors appear.  # Use the content
+      of the file from the environment
+    commands: []
