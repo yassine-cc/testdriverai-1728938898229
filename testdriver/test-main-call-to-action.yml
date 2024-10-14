@@ -1,0 +1,59 @@
+version: 4.0.68
+steps:
+  - prompt: Focus the browser window.
+    commands:
+      - command: focus-application
+        name: Google Chrome
+  - prompt: Locate and click on the "Join the Beta" button.
+    commands:
+      - command: hover-text
+        text: Join the Beta
+        description: button to join the beta program
+        action: click
+  - prompt: Locate and click on the "Join the Beta" button.
+    commands:
+      - command: hover-text
+        text: Start
+        description: button to start the application process
+        action: click
+  - prompt: Locate and click on the "Join the Beta" button.
+    commands:
+      - command: hover-text
+        text: OK
+        description: button to confirm the email entry
+        action: click
+  - prompt: Locate and click on the "Join the Beta" button.
+    commands:
+      - command: scroll-until-text
+        text: Join the Beta
+        direction: down
+  - prompt: Locate and click on the "Join the Beta" button.
+    commands:
+      - command: scroll-until-text
+        text: Join the Beta
+        direction: down
+  - prompt: Locate and click on the "Join the Beta" button.
+    commands:
+      - command: scroll-until-text
+        text: Join the Beta
+        direction: down
+  - prompt: Locate and click on the "Join the Beta" button.
+    commands:
+      - command: scroll-until-text
+        text: Join the Beta
+        direction: down
+  - prompt: Locate and click on the "Join the Beta" button.
+    commands:
+      - command: scroll-until-text
+        text: Join the Beta
+        direction: down
+  - prompt: Locate and click on the "Join the Beta" button.
+    commands:
+      - command: scroll-until-text
+        text: Join the Beta
+        direction: down
+  - prompt: Locate and click on the "Join the Beta" button.
+    commands:
+      - command: scroll-until-text
+        text: Join the Beta
+        direction: down
