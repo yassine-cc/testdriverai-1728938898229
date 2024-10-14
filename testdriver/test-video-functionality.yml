@@ -1,0 +1,22 @@
+version: 4.0.68
+steps:
+  - prompt: Focus the browser window.
+    commands:
+      - command: focus-application
+        name: Google Chrome
+  - prompt: Click on "Watch video" on the homepage.
+    commands:
+      - command: hover-text
+        text: Watch video
+        description: button on the homepage
+        action: click
+  - prompt: Click on "Watch video" on the homepage.
+    commands:
+      - command: hover-text
+        text: Watch video
+        description: button on the homepage
+        action: click
+  - prompt: Assert that the video player opens.
+    commands:
+      - command: assert
+        expect: the video player interface is visible
